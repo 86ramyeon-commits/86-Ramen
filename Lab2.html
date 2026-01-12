@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฮะจิบัง ราเมน - Hachiban Ramen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="Homepage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Kanit', 'Noto Serif JP', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #b54130;
+        }
+
+        .language {
+            margin-left: 1rem;
+            color: #718096;
+            font-size: 0.875rem;
+        }
+
+        .language span {
+            color: #b54130;
+            font-weight: 600;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Carousel */
+        .hero {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-inner {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: 1px solid #e2e8f0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+
+        .carousel-btn:hover {
+            background: #f7fafc;
+        }
+
+        .carousel-prev {
+            left: 2rem;
+        }
+
+        .carousel-next {
+            right: 2rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 0;
+            background: #f5f1ef;
+        }
+
+        .about h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .about .subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #718096;
+            margin-bottom: 3rem;
+        }
+
+        .about-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border: 4px solid #2d3748;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .about-box h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .about-box p {
+            font-size: 1.125rem;
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+
+        .about-box .bold {
+            font-weight: 700;
+        }
+
+        .divider {
+            border-top: 2px solid #cbd5e0;
+            margin: 2rem 0;
+        }
+
+        .history-img {
+            max-width: 700px;
+            margin: 3rem auto 0;
+            opacity: 0.7;
+        }
+
+        .history-img img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .menu h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .menu h2 .jp {
+            font-weight: 300;
+            color: #4a5568;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-card {
+            position: relative;
+            height: 350px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .menu-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .menu-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .menu-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+        }
+
+        .menu-card h3 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .menu-card p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+
+        /* Branch Section */
+        .branch {
+            padding: 4rem 0;
+            background: #f5f1ef;
+        }
+
+        .branch h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #b54130;
+            box-shadow: 0 0 0 3px rgba(181, 65, 48, 0.1);
+        }
+
+        .map-placeholder {
+            max-width: 1000px;
+            margin: 0 auto 2rem;
+            height: 500px;
+            background: linear-gradient(135deg, #d4f4dd 0%, #c3e8f5 100%);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-content {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .map-icon {
+            width: 64px;
+            height: 64px;
+            fill: #b54130;
+            margin: 0 auto 1rem;
+        }
+
+        .branch-list {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .branch-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .branch-item:hover {
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .branch-item h3 {
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.25rem;
+        }
+
+        .branch-item p {
+            font-size: 0.875rem;
+            color: #718096;
+        }
+
+        /* Career Section */
+        .career {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .career-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: linear-gradient(135deg, #f7fafc 0%, white 100%);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .career-text {
+            padding: 3rem;
+            position: relative;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0,0,0,0.02) 10px,
+                rgba(0,0,0,0.02) 20px
+            );
+        }
+
+        .career-text p {
+            color: #b54130;
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .career-text h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .career-btn {
+            background: #b54130;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+            font-family: 'Kanit', sans-serif;
+            font-weight: 500;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .career-btn:hover {
+            background: #9d3728;
+        }
+
+        .career-image {
+            height: 100%;
+        }
+
+        .career-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #f7fafc 0%, white 100%);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #4a5568;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #b54130;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            width: 48px;
+            height: 48px;
+            background: #b54130;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .social-icon:hover {
+            background: #9d3728;
+        }
+
+        .social-icon img {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0) invert(1);
+        }
+
+        .copyright {
+            text-align: center;
+            color: #718096;
+            font-size: 0.875rem;
+        }
+
+        /* Cookie Notice */
+        .cookie-notice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #b54130;
+            color: white;
+            padding: 1rem;
+            z-index: 1000;
+            display: none;
+        }
+
+        .cookie-notice.show {
+            display: block;
+        }
+
+        .cookie-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .cookie-text {
+            flex: 1;
+            font-size: 0.875rem;
+        }
+
+        .cookie-text a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .cookie-btn {
+            background: white;
+            color: #b54130;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.375rem;
+            font-family: 'Kanit', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .cookie-btn:hover {
+            background: #f7fafc;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+                box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            }
+
+            .career-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 300px;
+            }
+
+            .about h2,
+            .menu h2,
+            .branch h2 {
+                font-size: 2rem;
+            }
+
+            .about-box {
+                padding: 2rem 1rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cookie-content {
+                flex-direction: column;
+            }
+
+            .carousel-prev {
+                left: 1rem;
+            }
+
+            .carousel-next {
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="https://ext.same-assets.com/2841085634/3658647698.png" alt="Hachiban Ramen">
+                </a>
+                <nav id="mainNav">
+                    <a href="#home">หน้าแรก</a>
+                    <a href="#about">เกี่ยวกับเรา</a>
+                    <a href="#menu">เมนู</a>
+                    <a href="#promotion">โปรโมชั่น</a>
+                    <a href="#branch">สาขา</a>
+                    <a href="#career">สมัครงาน</a>
+                    <a href="#contact">ติดต่อเรา</a>
+                    <span class="language">LANGUAGE: <span>ไทย</span></span>
+                </nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Carousel -->
+    <section id="home" class="hero">
+        <div class="carousel">
+            <div class="carousel-inner" id="carouselInner">
+                <div class="carousel-item">
+                    <img src="https://ext.same-assets.com/2841085634/1541522351.jpeg" alt="Delicious Hachiban Ramen">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://ext.same-assets.com/2841085634/1252728615.jpeg" alt="Hachiban Ramen Bowl">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://ext.same-assets.com/2841085634/4172236925.jpeg" alt="Tasty Ramen">
+                </div>
+            </div>
+            <button class="carousel-btn carousel-prev" id="prevBtn">‹</button>
+            <button class="carousel-btn carousel-next" id="nextBtn">›</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>ประวัติฮะจิบัง ราเมน ประเทศไทย</h2>
+            <p class="subtitle">ฮะจิบัง ราเมน (Hachiban Ramen)</p>
+            
+            <div class="about-box">
+                <h3>ฮะจิบัง ราเมน (Hachiban Ramen) หรือร้านราเมนหมายเลข 8 ก่อตั้งเมื่อปีสยามแรก</h3>
+                <p>ในปี ค.ศ. 1967 (พ.ศ. 2510) แบรนด์ ฮะจิบัง ราเมน จำกัด <span class="bold">8 แห่งในญี่ปุ่น</span></p>
+                
+                <div class="divider"></div>
+                
+                <p class="bold" style="font-size: 1.5rem;">สำหรับ</p>
+                <p class="bold" style="font-size: 1.5rem;">จนกลายเป็นราเมนที่ชื่อชอบของคนญี่ปุ่น</p>
+                <p class="bold" style="font-size: 1.5rem;">ปัจจุบันมีสาขาในประเทศญี่ปุ่นกว่า 100 สาขา</p>
+            </div>
+
+            <div class="history-img">
+                <img src="https://ext.same-assets.com/2841085634/3763920527.png" alt="Historical Hachiban Ramen">
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <h2>เมนู <span class="jp">メニュー</span></h2>
+            
+            <div class="menu-grid">
+                <a href="#ramen" class="menu-card">
+                    <img src="https://ext.same-assets.com/2841085634/2466904230.jpeg" alt="งานหลัก">
+                    <div class="menu-overlay">
+                        <h3>งานหลัก</h3>
+                        <p>メインディッシュ</p>
+                    </div>
+                </a>
+                <a href="#appetizer" class="menu-card">
+                    <img src="https://ext.same-assets.com/2841085634/3136616798.jpeg" alt="อาหารทานเล่น">
+                    <div class="menu-overlay">
+                        <h3>อาหารทานเล่น</h3>
+                        <p>前菜</p>
+                    </div>
+                </a>
+                <a href="#gyoza" class="menu-card">
+                    <img src="https://ext.same-assets.com/2841085634/503467013.jpeg" alt="วิธีการปรุง">
+                    <div class="menu-overlay">
+                        <h3>วิธีการปรุง</h3>
+                        <p>タレ餃子</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Branch Section -->
+    <section id="branch" class="branch">
+        <div class="container">
+            <h2>สาขาฮะจิบัง ราเมน ในประเทศไทย</h2>
+            
+            <div class="search-box">
+                <input type="text" id="branchSearch" placeholder="ค้นหา สาขาฮะจิบัง ราเมน ใกล้คุณ">
+            </div>
+
+            <div class="map-placeholder">
+                <div class="map-content">
+                    <svg class="map-icon" viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <p style="font-weight: 600; color: #4a5568;">แผนที่แสดงตำแหน่งสาขาฮะจิบัง ราเมน</p>
+                    <p style="font-size: 0.875rem; color: #718096; margin-top: 0.5rem;">มีสาขามากกว่า 6 แห่งทั่วประเทศ</p>
+                </div>
+            </div>
+
+            <div class="branch-list" id="branchList">
+                <div class="branch-item">
+                    <h3>สาขา เซ็นทรัล เวิลด์</h3>
+                    <p>กรุงเทพฯ</p>
+                </div>
+                <div class="branch-item">
+                    <h3>สาขา เซ็นทรัล พระราม 3</h3>
+                    <p>กรุงเทพฯ</p>
+                </div>
+                <div class="branch-item">
+                    <h3>สาขา เซ็นทรัล พระราม 2</h3>
+                    <p>กรุงเทพฯ</p>
+                </div>
+                <div class="branch-item">
+                    <h3>สาขา เซ็นทรัล พระราม 9</h3>
+                    <p>กรุงเทพฯ</p>
+                </div>
+                <div class="branch-item">
+                    <h3>สาขา เซ็นทรัล ปิ่นเกล้า</h3>
+                    <p>กรุงเทพฯ</p>
+                </div>
+                <div class="branch-item">
+                    <h3>สาขา เซ็นทรัล อีสวิลล์</h3>
+                    <p>กรุงเทพฯ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Section -->
+    <section id="career" class="career">
+        <div class="container">
+            <div class="career-content">
+                <div class="career-text">
+                    <p>"รายได้ดี มีความมั่นคง</p>
+                    <p>สวัสดิการเริ่ด"</p>
+                    <h2>ฮะจิบัง ราเมน</h2>
+                    <button class="career-btn">สมัครงานกับเรา</button>
+                </div>
+                <div class="career-image">
+                    <img src="https://ext.same-assets.com/2841085634/3997675627.png" alt="Join Hachiban Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#home">หน้าแรก</a>
+                <a href="#about">เกี่ยวกับเรา</a>
+                <a href="#menu">เมนู</a>
+                <a href="#promotion">โปรโมชั่น</a>
+                <a href="#branch">สาขา</a>
+                <a href="#career">สมัครงาน</a>
+                <a href="#privacy">ประกาศความเป็นส่วนตัว</a>
+                <a href="#cookies">นโยบายคุกกี้</a>
+            </div>
+
+            <div class="social-links">
+                <a href="#facebook" class="social-icon" aria-label="Facebook">
+                    <img src="https://ext.same-assets.com/2841085634/3252858360.png" alt="Facebook">
+                </a>
+                <a href="#instagram" class="social-icon" aria-label="Instagram">
+                    <img src="https://ext.same-assets.com/2841085634/4243166272.png" alt="Instagram">
+                </a>
+                <a href="#youtube" class="social-icon" aria-label="YouTube">
+                    <img src="https://ext.same-assets.com/2841085634/2255583746.png" alt="YouTube">
+                </a>
+                <a href="#twitter" class="social-icon" aria-label="Twitter">
+                    <img src="https://ext.same-assets.com/2841085634/1179721539.png" alt="Twitter">
+                </a>
+            </div>
+
+            <p class="copyright">Copyright © 2019 HACHIBAN RAMEN. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cookie Notice -->
+    <div class="cookie-notice" id="cookieNotice">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                เว็บไซต์นี้มีการจัดเก็บข้อมูลเพื่อการใช้งานเว็บไซต์ดีขึ้น ปรับปรุง ให้ระบบอัจฉริยะ จำกัด ขอความยินยอมกับคุณกรรมประมวลผล กรุ่งเทพฯ ข้อมูลเกี่ยวกับการใช้งานเว็บไซต์และการใช้งานเว็บไซต์ดีขึ้น รวมทั้งจัดลำดับส่วนบุคคลของผู้ใช้งาน 
+                <a href="#privacy">อ่านเพิ่มเติมในนโยบายความเป็นส่วนตัว</a>
+            </div>
+            <button class="cookie-btn" id="acceptCookie">ยินยอม</button>
+        </div>
+    </div>
+
+    <script>
+        // Carousel
+        const carouselInner = document.getElementById('carouselInner');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+        const totalSlides = 3;
+
+        function showSlide(index) {
+            if (index >= totalSlides) currentSlide = 0;
+            else if (index < 0) currentSlide = totalSlides - 1;
+            else currentSlide = index;
+            
+            carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+
+        // Auto-play carousel
+        setInterval(() => showSlide(currentSlide + 1), 4000);
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('mobile-open');
+        });
+
+        // Branch Search
+        const branchSearch = document.getElementById('branchSearch');
+        const branchList = document.getElementById('branchList');
+        const branchItems = branchList.querySelectorAll('.branch-item');
+
+        branchSearch.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            branchItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+
+        // Cookie Notice
+        const cookieNotice = document.getElementById('cookieNotice');
+        const acceptCookie = document.getElementById('acceptCookie');
+
+        // Show cookie notice if not accepted
+        if (!localStorage.getItem('cookieAccepted')) {
+            cookieNotice.classList.add('show');
+        }
+
+        acceptCookie.addEventListener('click', () => {
+            localStorage.setItem('cookieAccepted', 'true');
+            cookieNotice.classList.remove('show');
+        });
+    </script>
+</body>
+</html>
